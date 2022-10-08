@@ -98,6 +98,35 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "RemoveById",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/HUS/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"HUS",
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
