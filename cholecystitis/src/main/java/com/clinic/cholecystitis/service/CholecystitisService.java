@@ -1,20 +1,17 @@
 package com.clinic.cholecystitis.service;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
 
 import DB.DB;
-import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
 import com.clinic.cholecystitis.model.Cholecystitis;
 
 import com.clinic.cholecystitis.model.ethnicityDef;
 @Service
-public class FracturesService {
+public class CholecystitisService {
 
     DB database;
-    FracturesService(){
+    CholecystitisService(){
         database = new DB();
     }
 

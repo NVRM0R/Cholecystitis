@@ -1,29 +1,26 @@
 package com.clinic.cholecystitis.controller;
 
 import com.clinic.cholecystitis.model.Cholecystitis;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
-import com.clinic.cholecystitis.service.FracturesService;
+import com.clinic.cholecystitis.service.CholecystitisService;
 
 
 @RestController
 
 @RequestMapping("/{hospitalName}/")
-public class FracturesController {
+public class CholecystitisController {
 
     @Autowired
-    private FracturesService fracturesService;
+    private CholecystitisService CholecystitisService;
 
     @GetMapping(value="/test")
     public ResponseEntity<String> test(
@@ -34,21 +31,21 @@ public class FracturesController {
     @GetMapping(value="/fillSomething")
     public ResponseEntity<String> fillData(
             @PathVariable("hospitalName") String hospitalName){
-        fracturesService.fillDummy();
+        CholecystitisService.fillDummy();
         return ResponseEntity.ok("\uD83D\uDC4C");
     }
 
     @GetMapping(value="/getList")
     public ResponseEntity<String> getAllData(
             @PathVariable("hospitalName") String hospitalName){
-        return ResponseEntity.ok(fracturesService.serialize(-1));
+        return ResponseEntity.ok(CholecystitisService.serialize(-1));
     }
 
     @PostMapping
     public ResponseEntity<String> createRecord(
             @PathVariable("hospitalName") String hospitalName,
             @RequestBody Cholecystitis request) {
-        return ResponseEntity.ok(fracturesService.createInstance(request, hospitalName));
+        return ResponseEntity.ok(CholecystitisService.createInstance(request, hospitalName));
     }
 
     @GetMapping
@@ -57,7 +54,7 @@ public class FracturesController {
             @RequestBody String id) {
         int num = Integer.parseInt(id.replaceAll("[^0-9]",""));
         System.out.println("GET: "+num);
-        return ResponseEntity.ok(fracturesService.serialize(num));
+        return ResponseEntity.ok(CholecystitisService.serialize(num));
     }
     @DeleteMapping
     public ResponseEntity<String> delRecord(
@@ -66,7 +63,7 @@ public class FracturesController {
         int num = Integer.parseInt(id.replaceAll("[^0-9]",""));
         System.out.println("DELETE: "+num);
         String result = "???";
-        if(fracturesService.delete(num))
+        if(CholecystitisService.delete(num))
             result = "\uD83D\uDC4C";
         else
             result = "\uD83D\uDE48";
