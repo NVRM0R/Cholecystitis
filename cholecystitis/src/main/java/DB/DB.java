@@ -13,7 +13,7 @@ public class DB {
         this.currentId = 0;
     }
     public int push(Cholecystitis newData){
-        newData.setId(this.currentId);
+        newData.setRecordID(this.currentId);
         this.currentId+=1;
         data.add(newData);
         return this.currentId-1;

@@ -3,15 +3,16 @@ package com.clinic.cholecystitis.model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
+import org.springframework.hateoas.RepresentationModel;
 
 
 @Getter
 @Setter
 @ToString
-public class Cholecystitis {
+public class Cholecystitis extends RepresentationModel<Cholecystitis> {
 
-    private int id;
+    private int recordID;
+    private int patientID;
     private String hospitalName;
 
     private ethnicityDef ethnicity;
@@ -21,7 +22,7 @@ public class Cholecystitis {
     private float WBC, NE, LY, MO, EO, BA;
 
     public Cholecystitis(ethnicityDef ethnicity, int age, boolean sex, float cholesterol, float WBC, float NE,
-                         float LY, float MO, float EO, float BA, String hospitalName){
+                         float LY, float MO, float EO, float BA, String hospitalName,int patientID){
         this.age = age;
         this.ethnicity = ethnicity;
         this.sex = sex;
@@ -33,5 +34,6 @@ public class Cholecystitis {
         this.EO = EO;
         this.BA = BA;
         this.hospitalName = hospitalName;
+        this.patientID = patientID;
     }
 }

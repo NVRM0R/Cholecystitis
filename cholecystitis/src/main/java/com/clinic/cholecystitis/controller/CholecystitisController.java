@@ -2,16 +2,15 @@ package com.clinic.cholecystitis.controller;
 
 import com.clinic.cholecystitis.model.Cholecystitis;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-
+import org.springframework.web.bind.annotation.*;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import com.clinic.cholecystitis.service.CholecystitisService;
+
+import java.util.ArrayList;
+import java.util.Locale;
 
 
 @RestController
@@ -21,7 +20,8 @@ public class CholecystitisController {
 
     @Autowired
     private CholecystitisService CholecystitisService;
-
+    @Autowired
+    MessageSource messages;
     @GetMapping(value="/test")
     public ResponseEntity<String> test(
             @PathVariable("hospitalName") String hospitalName){
@@ -35,38 +35,48 @@ public class CholecystitisController {
         return ResponseEntity.ok("\uD83D\uDC4C");
     }
 
-    @GetMapping(value="/getList")
-    public ResponseEntity<String> getAllData(
-            @PathVariable("hospitalName") String hospitalName){
-        return ResponseEntity.ok(CholecystitisService.serialize(-1));
+    // Все записи пациента
+    @GetMapping(value="/allRecords/{patientID}")
+    public ResponseEntity<String> viewOtherRecords(
+            @PathVariable("hospitalName") String hospitalName,
+            @PathVariable("patientID") int patientID){
+        return ResponseEntity.ok(CholecystitisService.serialize(patientID,hospitalName));
     }
-
     @PostMapping
     public ResponseEntity<String> createRecord(
             @PathVariable("hospitalName") String hospitalName,
-            @RequestBody Cholecystitis request) {
-        return ResponseEntity.ok(CholecystitisService.createInstance(request, hospitalName));
+            @RequestBody Cholecystitis request,
+            @RequestHeader(value = "Accept-Language",required = false)
+            Locale locale) {
+        return ResponseEntity.ok(CholecystitisService.createInstance(request, hospitalName, locale));
     }
 
-    @GetMapping
-    public ResponseEntity<String> getRecord(
+    @GetMapping(value="/record/{id}")
+    public ResponseEntity<Cholecystitis> getRecord(
             @PathVariable("hospitalName") String hospitalName,
-            @RequestBody String id) {
-        int num = Integer.parseInt(id.replaceAll("[^0-9]",""));
-        System.out.println("GET: "+num);
-        return ResponseEntity.ok(CholecystitisService.serialize(num));
+            @PathVariable("id") int id,
+            @RequestHeader(value = "Accept-Language",required = false)
+            Locale locale) {
+        System.out.println("GET: "+id);
+        Cholecystitis record = CholecystitisService.getById(id);
+        record.add(linkTo(methodOn(CholecystitisController.class)
+                        .getRecord(hospitalName, id,null))
+                        .withSelfRel(),
+                linkTo(methodOn(CholecystitisController.class)
+                        .viewOtherRecords(hospitalName, id))
+                        .withRel(messages.getMessage("record.get.all", null, locale)),
+                linkTo(methodOn(CholecystitisController.class)
+                        .delRecord(hospitalName, id, null))
+                        .withRel(messages.getMessage("record.delete.id", null, locale)));
+        return ResponseEntity.ok(record);
     }
-    @DeleteMapping
+    @DeleteMapping(value="/delete/{id}")
     public ResponseEntity<String> delRecord(
             @PathVariable("hospitalName") String hospitalName,
-            @RequestBody String id) {
-        int num = Integer.parseInt(id.replaceAll("[^0-9]",""));
-        System.out.println("DELETE: "+num);
-        String result = "???";
-        if(CholecystitisService.delete(num))
-            result = "\uD83D\uDC4C";
-        else
-            result = "\uD83D\uDE48";
-        return ResponseEntity.ok(result);
+            @PathVariable("id") int id,
+            @RequestHeader(value = "Accept-Language",required = false)
+            Locale locale) {
+        System.out.println("DELETE: "+id);
+        return ResponseEntity.ok(CholecystitisService.delete(id, hospitalName, locale));
     }
 }

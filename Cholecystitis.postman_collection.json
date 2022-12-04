@@ -1,0 +1,306 @@
+{
+	"info": {
+		"_postman_id": "96e91b96-8d1a-4491-b0cf-17e38b4ac63a",
+		"name": "Cholecystitis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cases",
+			"item": [
+				{
+					"name": "Patient 1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ethnicity\":\"Latino\",\n    \"age\":66,\n    \"sex\":true,\n    \"cholesterol\":3.0,\n    \"WBC\":1.2, \n    \"NE\":2.2, \n    \"LY\":3.3, \n    \"MO\":4.4, \n    \"EO\":5.5,\n    \"BA\":5.5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/HUS/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"HUS",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Actuator",
+			"item": [
+				{
+					"name": "Actuator",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/actuator",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actuator"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List of metrics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/actuator/metrics",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actuator",
+								"metrics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "exec time",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/actuator/metrics/application.started.time",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actuator",
+								"metrics",
+								"application.started.time"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "available CPUs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/actuator/metrics/system.cpu.count",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actuator",
+								"metrics",
+								"system.cpu.count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Environment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/actuator/env",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actuator",
+								"env"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Beans info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/actuator/env",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actuator",
+								"env"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HTTP exchg",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/actuator/httpexchanges",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actuator",
+								"httpexchanges"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FillDummy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/HUS/fillSomething",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"HUS",
+						"fillSomething"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ViewAll",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":-1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/HUS/allRecords/-1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"HUS",
+						"allRecords",
+						"-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getById",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/HUS/record/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"HUS",
+						"record",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RemoveById",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "rus",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/HUS/delete/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"HUS",
+						"delete",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
