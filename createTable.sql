@@ -24,3 +24,10 @@ TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public."Records"
     OWNER to "myUser";
+
+
+
+SELECT * FROM public.records
+ORDER BY recordid ASC 
+
+TRUNCATE public.records

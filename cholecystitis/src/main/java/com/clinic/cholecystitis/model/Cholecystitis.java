@@ -5,60 +5,63 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.hateoas.RepresentationModel;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Getter
 @Setter
 @ToString
 @Entity
-@Table(name="Records")
+@Table(name="records")
 public class Cholecystitis extends RepresentationModel<Cholecystitis> {
 
     @Id
-    @Column(name="recordID",nullable = false)
-    private int recordID;
-    @Column(name="patientID",nullable = false)
-    private int patientID;
-    @Column(name="hospitalName",nullable = false)
-    private String hospitalName;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int recordid;
+    @Column(name="patientid",nullable = false)
+    private int patientid;
+    @Column(name="hospitalname",nullable = false)
+    private String hospitalname;
     @Column(name="ethnicity",nullable = false)
     private ethnicityDef ethnicity;
     @Column(name="age",nullable = false)
     private int age;
     @Column(name="sex",nullable = false)
     private boolean sex;
-    @Column(name="cholecterol",nullable = false)
+    @Column(name="cholesterol",nullable = false)
     private float cholesterol;
-    @Column(name="WBC",nullable = false)
-    private float WBC;
-    @Column(name="NE",nullable = false)
-    private float NE;
-    @Column(name="LY",nullable = false)
-    private float LY;
-    @Column(name="MO",nullable = false)
-    private float MO;
-    @Column(name="EO",nullable = false)
-    private float EO;
-    @Column(name="BA",nullable = false)
-    private float BA;
+    @Column(name="wbc",nullable = false)
+    private float wbc;
+    @Column(name="ne",nullable = false)
+    private float ne;
+    @Column(name="ly",nullable = false)
+    private float ly;
+    @Column(name="mo",nullable = false)
+    private float mo;
+    @Column(name="eo",nullable = false)
+    private float eo;
+    @Column(name="ba",nullable = false)
+    private float ba;
+
+    private String comment;
+    public Cholecystitis withComment(String comment){
+        this.setComment(comment);
+        return this;
+    }
     public Cholecystitis(){}
-    public Cholecystitis(ethnicityDef ethnicity, int age, boolean sex, float cholesterol, float WBC, float NE,
-                         float LY, float MO, float EO, float BA, String hospitalName,int patientID){
+    public Cholecystitis(ethnicityDef ethnicity, int age, boolean sex, float cholesterol, float wbc, float ne,
+                         float ly, float mo, float eo, float ba, String hospitalname,int patientid){
         this.age = age;
         this.ethnicity = ethnicity;
         this.sex = sex;
         this.cholesterol = cholesterol;
-        this.WBC = WBC;
-        this.NE = NE;
-        this.LY = LY;
-        this.MO = MO;
-        this.EO = EO;
-        this.BA = BA;
-        this.hospitalName = hospitalName;
-        this.patientID = patientID;
+        this.wbc = wbc;
+        this.ne = ne;
+        this.ly = ly;
+        this.mo = mo;
+        this.eo = eo;
+        this.ba = ba;
+        this.hospitalname = hospitalname;
+        this.patientid = patientid;
     }
 }

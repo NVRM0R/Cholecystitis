@@ -21,7 +21,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"ethnicity\":\"Latino\",\n    \"age\":66,\n    \"sex\":true,\n    \"cholesterol\":3.0,\n    \"WBC\":1.2, \n    \"NE\":2.2, \n    \"LY\":3.3, \n    \"MO\":4.4, \n    \"EO\":5.5,\n    \"BA\":5.5\n}",
+							"raw": "{\n    \"ethnicity\":\"Latino\",\n    \"age\":66,\n    \"sex\":true,\n    \"cholesterol\":3.0,\n    \"wbc\":1.2, \n    \"ne\":2.2, \n    \"ly\":3.3, \n    \"mo\":4.4, \n    \"eo\":5.5,\n    \"ba\":5.5\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -38,6 +38,99 @@
 							"path": [
 								"HUS",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByRecordId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/HUS/record/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"HUS",
+								"record",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"field\": \"d\",\n    \"value\": \"d\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/HUS/edit/0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"HUS",
+								"edit",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RemoveById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "rus",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/HUS/delete/15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"HUS",
+								"delete",
+								"15"
 							]
 						}
 					},
@@ -192,6 +285,71 @@
 			]
 		},
 		{
+			"name": "Config Server",
+			"item": [
+				{
+					"name": "Dev",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8071/сholecystitis/dev",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8071",
+							"path": [
+								"сholecystitis",
+								"dev"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Prod",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8071/сholecystitis/prod",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8071",
+							"path": [
+								"сholecystitis",
+								"prod"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Default",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8071/сholecystitis/default",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8071",
+							"path": [
+								"сholecystitis",
+								"default"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "FillDummy",
 			"request": {
 				"method": "GET",
@@ -212,19 +370,12 @@
 			"response": []
 		},
 		{
-			"name": "ViewAll",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "ping",
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"id\":-1\n}"
-				},
 				"url": {
-					"raw": "http://localhost:8080/HUS/allRecords/-1",
+					"raw": "http://localhost:8080/HUS/test",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -232,71 +383,7 @@
 					"port": "8080",
 					"path": [
 						"HUS",
-						"allRecords",
-						"-1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getById",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept-Language",
-						"value": "en",
-						"type": "default"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/HUS/record/2",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"HUS",
-						"record",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "RemoveById",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Accept-Language",
-						"value": "rus",
-						"type": "default"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"id\":1\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/HUS/delete/3",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"HUS",
-						"delete",
-						"3"
+						"test"
 					]
 				}
 			},

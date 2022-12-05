@@ -14,7 +14,8 @@
 	<name>cholecystitis</name>
 	<description>cholecystitis microservice</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>18</java.version>
+		<spring.cloud-version>2021.0.4</spring.cloud-version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -59,7 +60,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
+			<artifactId> postgresql </artifactId>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>

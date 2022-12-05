@@ -1,15 +1,7 @@
 ﻿spring:
   application:
-    name: cholecystitis
+    name: сholecystitis
   profiles:
     active: dev
   config:
-    import:
-      optional:configserver:http://192.168.1.23:8071
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-    health:
-      show-details: always
+    import: optional:configserver:http://localhost:8071
