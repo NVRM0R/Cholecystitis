@@ -89,4 +89,8 @@ public class CholecystitisService {
             responseMessage = String.format(messages.getMessage("record.delete.message.not.found", null, locale), id);
         return responseMessage;
     }
+
+    public String edit(int recordID,String field,String value){
+        return String.format("Selected field: [%s] and desired value [%s]",field,value);
+    }
 }

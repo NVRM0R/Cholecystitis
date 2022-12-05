@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.*;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import com.clinic.cholecystitis.service.CholecystitisService;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 
 @RestController
@@ -42,6 +45,17 @@ public class CholecystitisController {
             @PathVariable("patientID") int patientID){
         return ResponseEntity.ok(CholecystitisService.serialize(patientID,hospitalName));
     }
+
+    // Все записи пациента
+    @PutMapping(value="/edit/{recordID}")
+    public ResponseEntity<String> editRecord(
+            @PathVariable("hospitalName") String hospitalName,
+            @RequestBody HashMap<String, String> record,
+            @PathVariable("recordID") int recordID){
+        System.out.println("HERE");
+        return ResponseEntity.ok(CholecystitisService.edit(recordID,record.get("field"),record.get("value")));
+    }
+
     @PostMapping
     public ResponseEntity<String> createRecord(
             @PathVariable("hospitalName") String hospitalName,

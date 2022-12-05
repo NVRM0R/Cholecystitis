@@ -20,7 +20,6 @@ public class Cholecystitis extends RepresentationModel<Cholecystitis> {
     private boolean sex;
     private float cholesterol;
     private float WBC, NE, LY, MO, EO, BA;
-
     public Cholecystitis(ethnicityDef ethnicity, int age, boolean sex, float cholesterol, float WBC, float NE,
                          float LY, float MO, float EO, float BA, String hospitalName,int patientID){
         this.age = age;
