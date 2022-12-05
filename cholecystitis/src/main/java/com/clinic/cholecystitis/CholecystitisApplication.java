@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.info.InfoContributor;
 import org.springframework.boot.actuate.info.MapInfoContributor;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.LocaleResolver;
@@ -14,6 +15,7 @@ import java.util.Locale;
 import java.util.Map;
 
 @SpringBootApplication
+@RefreshScope
 public class CholecystitisApplication {
 
 	public static void main(String[] args) {

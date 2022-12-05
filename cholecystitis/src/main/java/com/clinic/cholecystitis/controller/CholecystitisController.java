@@ -17,7 +17,6 @@ import java.util.Map;
 
 
 @RestController
-
 @RequestMapping("/{hospitalName}/")
 public class CholecystitisController {
 
@@ -33,8 +32,9 @@ public class CholecystitisController {
 
     @GetMapping(value="/fillSomething")
     public ResponseEntity<String> fillData(
-            @PathVariable("hospitalName") String hospitalName){
-        CholecystitisService.fillDummy();
+            @PathVariable("hospitalName") String hospitalName,
+            @RequestHeader(value = "Accept-Language",required = false) Locale locale){
+        CholecystitisService.fillDummy(hospitalName,locale);
         return ResponseEntity.ok("\uD83D\uDC4C");
     }
 
@@ -72,7 +72,7 @@ public class CholecystitisController {
             @RequestHeader(value = "Accept-Language",required = false)
             Locale locale) {
         System.out.println("GET: "+id);
-        Cholecystitis record = CholecystitisService.getById(id);
+        Cholecystitis record = CholecystitisService.getById(id,hospitalName);
         record.add(linkTo(methodOn(CholecystitisController.class)
                         .getRecord(hospitalName, id,null))
                         .withSelfRel(),
