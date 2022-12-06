@@ -62,23 +62,25 @@ public class CholecystitisController {
         }
 
     @PostMapping
-    public ResponseEntity<Cholecystitis> createRecord(
+    public ResponseEntity<String> createRecord(
             @PathVariable("hospitalname") String hospitalname,
             @RequestBody Cholecystitis request,
             @RequestHeader(value = "Accept-Language",required = false)
             Locale locale) {
-        return ResponseEntity.ok(CholecystitisService.createInstance(request, hospitalname, locale));
+        CholecystitisService.createInstance(request, hospitalname, locale);
+        return ResponseEntity.ok(messages.getMessage("record.create.message",null,locale));
     }
 
     @GetMapping(value="/record/{id}")
-    public ResponseEntity<String> getRecord(
+    public ResponseEntity<Object> getRecord(
             @PathVariable("hospitalname") String hospitalname,
             @PathVariable("id") int id,
             @RequestHeader(value = "Accept-Language",required = false)
             Locale locale) {
         System.out.println("GET: "+id);
+        System.out.println("TEST\n\n"+locale);
         try {
-            Cholecystitis record = CholecystitisService.getById(id, hospitalname);
+            Cholecystitis record = CholecystitisService.getById(id, hospitalname,locale);
             record.add(linkTo(methodOn(CholecystitisController.class)
                             .getRecord(hospitalname, id, null))
                             .withSelfRel(),
@@ -86,12 +88,12 @@ public class CholecystitisController {
                             .viewOtherRecords(hospitalname, id))
                             .withRel(messages.getMessage("record.get.all", null, locale)),
                     linkTo(methodOn(CholecystitisController.class)
-                            .delRecord(hospitalname, id, null))
+                            .delRecord(hospitalname, id, locale))
                             .withRel(messages.getMessage("record.delete.id", null, locale)));
-            return ResponseEntity.ok(record.toString());
+            return ResponseEntity.ok(record);
         }
         catch(Exception e){
-            return ResponseEntity.status(404).body(e.getMessage());
+            return ResponseEntity.status(404).body(String.format(messages.getMessage("search.error.message",null,locale),hospitalname,id));
         }
     }
     @DeleteMapping(value="/delete/{id}")

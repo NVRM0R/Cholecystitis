@@ -56,10 +56,10 @@ public class CholecystitisService {
         return output;
     }
 
-    public Cholecystitis getById(int recordid,String hospitalname) {
+    public Cholecystitis getById(int recordid,String hospitalname,Locale locale) {
         Cholecystitis record = cholecystitisRepository.findByRecordid(recordid);
         if (null == record) {
-            throw new IllegalArgumentException(String.format(messages.getMessage("search.error.message", null, null), hospitalname,recordid));
+            throw new IllegalArgumentException(String.format(messages.getMessage("search.error.message", null, locale), hospitalname,recordid));
         }
         return record.withComment(config.getProperty());
     }
@@ -78,7 +78,7 @@ public class CholecystitisService {
     public String edit(int recordID,String field,String value,Locale locale){
         Cholecystitis record;
         try {
-            record = getById(recordID, null);
+            record = getById(recordID, null,locale);
 
         switch (field){
             case "patientid": record.setPatientid(Integer.parseInt(value));
