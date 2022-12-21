@@ -1,4 +1,4 @@
-# Cholecystitis
+# Cholecystitis microservice
 3 components spring boot based microservice for handling medical data
 Microservice consist of following components: microservice itself, config server, PostgreSQL database.
 
