@@ -44,8 +44,8 @@ English, Lithuanian and Russian languages are supported. Language can be selecte
 Microservice has several actuator's open endpoints to check CPU and environment status.
 
 ## Database
-As an RDBMS PostgreSQL is choosen. The focus in this project was made on microservices, thus DB is represented by signle table with all records in it. \
-Table containis following filed about patient (base):
+As an RDBMS PostgreSQL is chosen. The focus in this project was made on microservices, thus DB is represented by signle table with all records in it. \
+Table contains following filed about patient (base):
 
 1. RecordID;
 2. PatientID;
